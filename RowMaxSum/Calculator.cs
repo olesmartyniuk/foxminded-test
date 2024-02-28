@@ -5,19 +5,23 @@ using System.Linq;
 
 namespace RowMaxSum;
 
-public static class Calculator
+public class Calculator
 {
-    public static int? GetRowWithMaxSum(string[] rows, out List<int> brokenRows)
+    public int? RowWithMaxSum { get; private set; }
+
+    public List<int> BrokenRows { get; private set; }
+
+    public Calculator(string[] rows)
     {
         var rowsWithSum = rows
-            .Select((row, index) => 
+            .Select((row, index) =>
             {
-                var sum = CalculateSum(row, out bool isValid);                                        
+                var sum = CalculateSum(row, out bool isValid);
                 return new { Index = index, Sum = sum, IsValid = isValid };
             })
             .ToList();
 
-        brokenRows = rowsWithSum
+        BrokenRows = rowsWithSum
             .Where(row => !row.IsValid)
             .Select(row => row.Index + 1)
             .ToList();
@@ -25,18 +29,20 @@ public static class Calculator
         var validRows = rowsWithSum
             .Where(row => row.IsValid);
 
-        if (!validRows.Any())
+        if (validRows.Any())
         {
-            return null;
+            RowWithMaxSum = validRows
+                .Aggregate((r1, r2) => r2.Sum > r1.Sum ? r2 : r1)
+                .Index + 1;
         }
+        else
+        {
+            RowWithMaxSum = null;            
+        }
+    }
 
-        return validRows
-            .Aggregate((r1, r2) => r2.Sum > r1.Sum ? r2 : r1)
-            .Index + 1;                
-    }       
-
-    private static double? CalculateSum(string row, out bool isValid)
-    {        
+    private double? CalculateSum(string row, out bool isValid)
+    {
         var parsedNumbers = row
             .Split(',')
             .Select(Parse);
@@ -51,7 +57,7 @@ public static class Calculator
         return parsedNumbers.Sum();
     }
 
-    private static double? Parse(string number)
+    private double? Parse(string number)
     {
         if (double.TryParse(
             number,

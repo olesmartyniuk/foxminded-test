@@ -9,10 +9,10 @@ class Program
     {
         var fileName = GetFileName(args);
         var rows = File.ReadAllLines(fileName);
-        var maxRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
+        var calc = new Calculator(rows);
 
-        Console.WriteLine($"Row with maximum sum: {maxRow}");
-        Console.WriteLine($"Broken rows: {string.Join(',', brokenRows)}");            
+        Console.WriteLine($"Row with maximum sum: {calc.RowWithMaxSum}");
+        Console.WriteLine($"Broken rows: {string.Join(',', calc.BrokenRows)}");            
     }
 
     private static string GetFileName(string[] args)
