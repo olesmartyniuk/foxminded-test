@@ -19,7 +19,7 @@ public static class Calculator
 
         brokenRows = rowsWithSum
             .Where(row => !row.IsValid)
-            .Select(row => row.Index)
+            .Select(row => row.Index + 1)
             .ToList();
 
         var validRows = rowsWithSum
@@ -32,7 +32,7 @@ public static class Calculator
 
         return validRows
             .Aggregate((r1, r2) => r2.Sum > r1.Sum ? r2 : r1)
-            .Index;                
+            .Index + 1;                
     }       
 
     private static double? CalculateSum(string row, out bool isValid)

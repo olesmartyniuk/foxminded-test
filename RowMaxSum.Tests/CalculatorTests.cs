@@ -11,7 +11,7 @@ public class CalculatorTests
         var rows = new[] { "1,2", "2,3.5" };            
         var maxSumRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
 
-        Assert.Equal(1, maxSumRow);
+        Assert.Equal(2, maxSumRow);
         Assert.Empty(brokenRows);            
     }
 
@@ -23,8 +23,8 @@ public class CalculatorTests
 
         Assert.Null(maxSumRow);
         Assert.Equal(2, brokenRows.Count);
-        Assert.Equal(0, brokenRows[0]);
-        Assert.Equal(1, brokenRows[1]);
+        Assert.Equal(1, brokenRows[0]);
+        Assert.Equal(2, brokenRows[1]);
     }
 
     [Fact]
@@ -33,9 +33,9 @@ public class CalculatorTests
         var rows = new[] { "1,2,3,7", "2,3.5", "invalid,row", "3,7" };            
         var maxSumRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
 
-        Assert.Equal(0, maxSumRow);
+        Assert.Equal(1, maxSumRow);
         Assert.Single(brokenRows);
-        Assert.Equal(2, brokenRows[0]);
+        Assert.Equal(3, brokenRows[0]);
     }
 
     [Fact]
@@ -59,9 +59,9 @@ public class CalculatorTests
         };
         var maxSumRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
 
-        Assert.Equal(2, maxSumRow);
+        Assert.Equal(3, maxSumRow);
         Assert.Single(brokenRows);
-        Assert.Equal(1, brokenRows[0]);            
+        Assert.Equal(2, brokenRows[0]);            
     }
 
     [Fact]
@@ -75,9 +75,9 @@ public class CalculatorTests
         };
         var maxSumRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
 
-        Assert.Equal(2, maxSumRow);
+        Assert.Equal(3, maxSumRow);
         Assert.Single(brokenRows);
-        Assert.Equal(1, brokenRows[0]);
+        Assert.Equal(2, brokenRows[0]);
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class CalculatorTests
         var rows = new[] { "-1,-2", "-2,-3.5", "+1,-6" };
         var maxSumRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
 
-        Assert.Equal(0, maxSumRow);
+        Assert.Equal(1, maxSumRow);
         Assert.Empty(brokenRows);
     }
 
@@ -96,7 +96,7 @@ public class CalculatorTests
         var rows = new[] { "1.1234567890123457", "12345678901234567.1234567890123458"};
         var maxSumRow = Calculator.GetRowWithMaxSum(rows, out var brokenRows);
 
-        Assert.Equal(1, maxSumRow);
+        Assert.Equal(2, maxSumRow);
         Assert.Empty(brokenRows);
     }
 }
