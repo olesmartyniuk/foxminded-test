@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RowMaxSum": {
+      "commandName": "Project",
+      "commandLineArgs": ".\\input.txt"
+    }
+  }
+}
