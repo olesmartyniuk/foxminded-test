@@ -93,4 +93,18 @@ public class CalculatorTests
         Assert.Equal(2, calc.RowWithMaxSum);
         Assert.Empty(calc.BrokenRows);
     }
+
+    [Fact]
+    public void ShouldSucceedFor2RowsWithSameSum()
+    {
+        var calc = new Calculator(new[]
+        {
+            "1,2,3",
+            "2,3,4",
+            "3,4,2"
+        });
+
+        Assert.Equal(2, calc.RowWithMaxSum);
+        Assert.Empty(calc.BrokenRows);
+    }
 }
